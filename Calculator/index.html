@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <main>
+
+        <div id="label">
+            
+        </div>
+
+        <div id="buttons">
+
+            <button type="button" class="clean" value="Clean" onclick="cleanValues()">Clean</button>
+            
+            <button type="button" class="delete" value="delete" onclick="deleteDigit()">Delete</button>
+
+            <button type="button" class="change" value="change" onclick="changeValue()">+/-</button>
+
+            <button type="button" class="operator" value="/">÷</button>
+            
+            <button type="button" class="number" value="7">7</button>
+            
+            <button type="button" class="number" value="8">8</button>
+            
+            <button type="button" class="number" value="9">9</button>
+
+            <button type="button" class="operator" value="*">X</button>
+            
+            <button type="button" class="number" value="4">4</button>
+            
+            <button type="button" class="number" value="5">5</button>
+            
+            <button type="button" class="number" value="6">6</button>
+
+            <button type="button" class="operator" value="-">-</button>
+            
+            <button type="button" class="number" value="3">3</button>
+            
+            <button type="button" class="number" value="2">2</button>
+            
+            <button type="button" class="number" value="1">1</button>
+
+            <button type="button" class="operator" value="+">+</button>
+            
+            <button type="button" class="number" value="00">00</button>
+        
+            <button type="button" class="number" value="0">0</button>
+            
+            <button type="button" class="number" value=".">.</button>
+
+            <button type="button" class="equals" value="=" onclick="equals()">=</button>
+
+        </div>
+
+    </main>
+
+    <script type="text/JavaScript">
+
+        let actualValue = "";
+        let valueOne = "";
+        let operator = "";
+
+        const numberGroup = document.querySelectorAll(".number");
+
+        const numberGroupPressed = (e) => {
+
+            actualValue += e.target.value;
+            document.getElementById("label").innerHTML = `${actualValue}`;
+        }
+
+        numberGroup.forEach(numberButton => {
+            
+            numberButton.addEventListener("click", numberGroupPressed);
+        });
+
+        const operatorGroup = document.querySelectorAll(".operator");
+
+        const operatorGroupPressed = (e) => {
+
+            operator = e.target.value;
+
+            if(valueOne == "")
+                valueOne = actualValue;
+                
+                actualValue = "";
+                document.getElementById("label").innerHTML = `${actualValue}`;
+            
+        }
+
+        operatorGroup.forEach(operator => {
+            
+            operator.addEventListener("click", operatorGroupPressed);
+        });
+    
+        const cleanValues = () => {
+
+            actualValue = "";
+            valueOne = "";
+            operator = "";
+
+            document.getElementById("label").innerHTML = `${actualValue}`;
+        }
+
+        const deleteDigit = () => {
+
+            if(actualValue != ""){
+            
+                actualValue = actualValue.toString();
+                actualValue = actualValue.slice(0, -1);
+
+                if(actualValue == "-")
+                    actualValue = "";
+
+                document.getElementById("label").innerHTML = actualValue;
+            }
+        }
+
+        const changeValue = () => {
+
+            if(actualValue != ""){
+
+                actualValue = parseFloat(actualValue) * -1;
+                document.getElementById("label").innerHTML = `${actualValue}`;
+            }
+        }
+
+        const equals = () => {
+
+            if(actualValue, valueOne == "")
+                return;
+
+            if(actualValue == "")
+                actualValue = valueOne;
+
+            switch(operator){
+
+                case("+"):
+
+                    valueOne = parseFloat(valueOne) + parseFloat(actualValue);
+                    break;
+                
+                case("-"):
+                
+                    valueOne = parseFloat(valueOne) - parseFloat(actualValue);
+                    break;
+                
+                case("*"):
+                
+                    valueOne = parseFloat(valueOne) * parseFloat(actualValue);
+                    break;
+                
+                case("-"):
+                
+                    valueOne = parseFloat(valueOne) / parseFloat(valueOactualValuene);
+                    break;
+            }
+
+            valueOne = valueOne.toString();
+            document.getElementById("label").innerHTML = `${valueOne}`;
+        }
+
+    </script>
+
+</body>
+</html>
